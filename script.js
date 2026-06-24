@@ -1,6 +1,6 @@
 // Presentation State
 let currentSlide = 1;
-const totalSlides = 12;
+const totalSlides = 13;
 let notesVisible = false;
 let revealStep = {};
 

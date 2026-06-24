@@ -8,7 +8,7 @@
 </head>
 <body>
     <div class="progress-bar" id="progressBar"></div>
-    <div class="slide-counter" id="slideCounter">1 / 12</div>
+    <div class="slide-counter" id="slideCounter">1 / 13</div>
     
     <div class="controls">
         <button class="control-btn" id="prevBtn" onclick="prevSlide()">&#8592;</button>
@@ -289,8 +289,83 @@
             </div>
         </section>
 
-        <!-- SLIDE 9: Impact -->
+        <!-- SLIDE 9: Live Demo - NEF + Devin -->
         <section class="slide" data-slide="9">
+            <div class="slide-content">
+                <h2 class="slide-title">Live Demo: NEF + Devin AI</h2>
+                <p class="demo-subtitle">AI-powered engineering on a standardised platform</p>
+                <div class="demo-container">
+                    <div class="demo-terminal">
+                        <div class="terminal-header">
+                            <span class="terminal-dot red"></span>
+                            <span class="terminal-dot yellow"></span>
+                            <span class="terminal-dot green"></span>
+                            <span class="terminal-title">devin@nab ~ NEF + AI Pipeline</span>
+                        </div>
+                        <div class="terminal-body" id="terminalBody">
+                            <div class="terminal-line ready">
+                                <span class="prompt">devin $</span> <span class="cursor blink">_</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="demo-flow">
+                        <div class="flow-step" id="step-task">
+                            <div class="flow-icon">&#x1F3AB;</div>
+                            <div class="flow-label">Task</div>
+                            <div class="flow-status"></div>
+                        </div>
+                        <div class="flow-arrow">&#8594;</div>
+                        <div class="flow-step" id="step-code">
+                            <div class="flow-icon">&#x1F916;</div>
+                            <div class="flow-label">Devin Codes</div>
+                            <div class="flow-status"></div>
+                        </div>
+                        <div class="flow-arrow">&#8594;</div>
+                        <div class="flow-step" id="step-pipeline">
+                            <div class="flow-icon">&#x2699;</div>
+                            <div class="flow-label">JTE Pipeline</div>
+                            <div class="flow-status"></div>
+                        </div>
+                        <div class="flow-arrow">&#8594;</div>
+                        <div class="flow-step" id="step-infra">
+                            <div class="flow-icon">&#x2601;</div>
+                            <div class="flow-label">Terraform</div>
+                            <div class="flow-status"></div>
+                        </div>
+                        <div class="flow-arrow">&#8594;</div>
+                        <div class="flow-step" id="step-comply">
+                            <div class="flow-icon">&#x1F6E1;</div>
+                            <div class="flow-label">Sentinel</div>
+                            <div class="flow-status"></div>
+                        </div>
+                        <div class="flow-arrow">&#8594;</div>
+                        <div class="flow-step" id="step-deploy">
+                            <div class="flow-icon">&#x1F680;</div>
+                            <div class="flow-label">Production</div>
+                            <div class="flow-status"></div>
+                        </div>
+                    </div>
+                    <div class="demo-controls">
+                        <button class="demo-btn" id="demoStartBtn" onclick="startDemo()">Start Demo</button>
+                        <button class="demo-btn demo-reset" id="demoResetBtn" onclick="resetDemo()" style="display:none">Reset</button>
+                    </div>
+                </div>
+            </div>
+            <div class="speaker-notes">
+                <h4>Speaker Notes</h4>
+                <p><strong>(3-4 min):</strong> This is where it gets exciting. Show how AI + NEF work together. Click "Start Demo" and narrate:</p>
+                <p><strong>Step 1 - Task:</strong> "A Jira ticket comes in: 'Add customer notification feature.' Devin picks it up automatically."</p>
+                <p><strong>Step 2 - Devin Codes:</strong> "Devin clones from our NEF quickstart template. Standard structure, standard language. It writes the implementation following our patterns — because NEF makes the right way the easy way."</p>
+                <p><strong>Step 3 - JTE Pipeline:</strong> "Devin pushes a PR. The Jenkins Templating Engine triggers automatically — no pipeline config needed. Standard tests, linting, security scans all run."</p>
+                <p><strong>Step 4 - Terraform:</strong> "Need infrastructure? Terraform Enterprise provisions it from standard modules. The AI doesn't need to know cloud specifics — NEF abstracts that away."</p>
+                <p><strong>Step 5 - Sentinel:</strong> "Policy as code validates everything. Compliance, security, audit — all automated. Neither Devin nor the human engineer needs to think about this."</p>
+                <p><strong>Step 6 - Production:</strong> "Deployed. Audit trail in ServiceNow. Customer feature live. This is why standardisation matters — it makes AI-powered engineering SAFE and FAST at enterprise scale."</p>
+                <p><strong>Key insight:</strong> "Without NEF, you can't safely let AI write code for a bank. WITH NEF, every guardrail is automated. AI becomes a force multiplier, not a risk."</p>
+            </div>
+        </section>
+
+        <!-- SLIDE 10: Impact -->
+        <section class="slide" data-slide="10">
             <div class="slide-content">
                 <h2 class="slide-title">The Impact</h2>
                 <div class="impact-grid">
@@ -325,7 +400,7 @@
         </section>
 
         <!-- SLIDE 10: Lessons Learned -->
-        <section class="slide" data-slide="10">
+        <section class="slide" data-slide="11">
             <div class="slide-content">
                 <h2 class="slide-title">Lessons Learned</h2>
                 <div class="lessons-grid">
@@ -362,7 +437,7 @@
         </section>
 
         <!-- SLIDE 11: The Bigger Picture -->
-        <section class="slide" data-slide="11">
+        <section class="slide" data-slide="12">
             <div class="slide-content centered-content">
                 <h2 class="slide-title">The Bigger Picture</h2>
                 <div class="philosophy-block" data-reveal="1">
@@ -395,7 +470,7 @@
         </section>
 
         <!-- SLIDE 12: Q&A -->
-        <section class="slide" data-slide="12">
+        <section class="slide" data-slide="13">
             <div class="slide-content centered-content">
                 <h2 class="slide-title">Let's Discuss</h2>
                 <div class="qa-section">
@@ -431,6 +506,7 @@
     </div>
 
     <script src="script.js"></script>
+    <script src="demo.js"></script>
     <script src="chatbot.js"></script>
 </body>
 </html>
