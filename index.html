@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NAB Engineering Foundation - Andrew Brydon</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="progress-bar" id="progressBar"></div>
+    <div class="slide-counter" id="slideCounter">1 / 12</div>
+    
+    <div class="controls">
+        <button class="control-btn" id="prevBtn" onclick="prevSlide()">&#8592;</button>
+        <button class="control-btn" id="nextBtn" onclick="nextSlide()">&#8594;</button>
+        <button class="control-btn notes-toggle" id="notesToggle" onclick="toggleNotes()">Notes</button>
+        <button class="control-btn chat-toggle" id="chatToggle" onclick="toggleChat()">Ask Andrew</button>
+    </div>
+
+    <!-- AI Chat Panel -->
+    <div class="chat-panel" id="chatPanel">
+        <div class="chat-header">
+            <div class="chat-header-info">
+                <div class="chat-avatar">AB</div>
+                <div>
+                    <div class="chat-name">Ask Andrew</div>
+                    <div class="chat-status">AI-powered Q&A about NEF</div>
+                </div>
+            </div>
+            <button class="chat-close" onclick="toggleChat()">&times;</button>
+        </div>
+        <div class="chat-messages" id="chatMessages">
+            <div class="chat-message bot">
+                <div class="message-content">
+                    G'day! I'm an AI version of Andrew. Ask me anything about the NAB Engineering Foundation - how we built it, the challenges, the tech stack, lessons learned, or my career journey. Fire away!
+                </div>
+            </div>
+        </div>
+        <div class="chat-input-area">
+            <input type="text" id="chatInput" placeholder="Ask a question..." onkeydown="if(event.key==='Enter')sendMessage()">
+            <button class="chat-send" onclick="sendMessage()">&#9654;</button>
+        </div>
+    </div>
+
+    <div class="presentation" id="presentation">
+
+        <!-- SLIDE 1: Title -->
+        <section class="slide active" data-slide="1">
+            <div class="slide-content title-slide">
+                <div class="title-accent"></div>
+                <h1 class="main-title">The NAB Engineering Foundation</h1>
+                <p class="subtitle">Transforming how 7,000+ engineers deliver at scale</p>
+                <div class="author-info">
+                    <div class="author-name">Andrew Brydon</div>
+                    <div class="author-role">Distinguished Engineer, National Australia Bank</div>
+                </div>
+                <div class="interactive-prompt fade-in-delayed">
+                    <p class="prompt-text">Before we begin...</p>
+                    <p class="prompt-question">How long does it take a new developer to deploy to production at your organisation?</p>
+                </div>
+            </div>
+            <div class="speaker-notes">
+                <h4>Speaker Notes</h4>
+                <p><strong>Opening (2 min):</strong> Start with the audience question. Let people call out answers. Most will say weeks or months. This sets up the contrast with NEF's goal: Day One.</p>
+                <p>Introduce yourself briefly: Distinguished Engineer at NAB, previously CTO Cloud at Telstra, VP Consulting at Contino. Nearly 25 years in tech across finance, telco, and startups.</p>
+            </div>
+        </section>
+
+        <!-- SLIDE 2: Context -->
+        <section class="slide" data-slide="2">
+            <div class="slide-content">
+                <h2 class="slide-title">The Context</h2>
+                <div class="context-grid">
+                    <div class="context-card" data-reveal="1">
+                        <div class="card-icon">&#x1F3E6;</div>
+                        <h3>NAB</h3>
+                        <p>One of Australia's largest banks. 35,000+ employees. Critical infrastructure for millions.</p>
+                    </div>
+                    <div class="context-card" data-reveal="2">
+                        <div class="card-icon">&#x2601;</div>
+                        <h3>Cloud-First</h3>
+                        <p>Early AWS adopter since 2014. Multi-cloud strategy across AWS and Azure.</p>
+                    </div>
+                    <div class="context-card" data-reveal="3">
+                        <div class="card-icon">&#x1F680;</div>
+                        <h3>Rapid Growth</h3>
+                        <p>Cloud adoption exploded. Teams were set free to move fast and take control.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="speaker-notes">
+                <h4>Speaker Notes</h4>
+                <p><strong>(2 min):</strong> Set the scene. NAB is not a startup - it's a heavily regulated financial institution. When we moved to cloud, we encouraged teams to move fast. This was deliberate - you NEED that phase to learn. But what happens next is the interesting part.</p>
+                <p>Key quote to use: "Every business needs to go through rapid cloud enablement to understand how a standardised approach will work."</p>
+            </div>
+        </section>
+
+        <!-- SLIDE 3: The Problem -->
+        <section class="slide" data-slide="3">
+            <div class="slide-content">
+                <h2 class="slide-title">The Problem</h2>
+                <div class="problem-visual">
+                    <div class="snowflake-container">
+                        <div class="snowflake" data-reveal="1">Team A<br><small>Custom CI/CD</small></div>
+                        <div class="snowflake" data-reveal="2">Team B<br><small>Different IaC</small></div>
+                        <div class="snowflake" data-reveal="3">Team C<br><small>Own security</small></div>
+                        <div class="snowflake" data-reveal="4">Team D<br><small>Unique deploy</small></div>
+                        <div class="snowflake" data-reveal="5">Team E<br><small>Custom platform</small></div>
+                        <div class="snowflake" data-reveal="6">Team F<br><small>Bespoke tooling</small></div>
+                    </div>
+                    <div class="problem-quote" data-reveal="7">
+                        <blockquote>"Teams were individually building the same components for the cloud in slightly different ways. Every team was a snowflake."</blockquote>
+                    </div>
+                </div>
+            </div>
+            <div class="speaker-notes">
+                <h4>Speaker Notes</h4>
+                <p><strong>(3 min):</strong> This is the crux. After the initial cloud rush, hundreds of squads were all building the same things differently. Each team had its own CI/CD, its own infrastructure patterns, its own compliance approach.</p>
+                <p><strong>Ask the audience:</strong> "Has anyone seen this pattern? You give teams autonomy and they all reinvent the wheel?" - Let people share briefly.</p>
+                <p>The consequence: onboarding was hard, movement between teams was hard, support was brittle. And in a BANK - compliance was being handled inconsistently.</p>
+            </div>
+        </section>
+
+        <!-- SLIDE 4: The Turning Point -->
+        <section class="slide" data-slide="4">
+            <div class="slide-content centered-content">
+                <div class="big-quote">
+                    <p class="quote-text">"You need to slow down to go faster."</p>
+                    <div class="quote-visual">
+                        <div class="speed-line fast" data-reveal="1">
+                            <span class="label">Before NEF</span>
+                            <div class="bar chaotic"></div>
+                            <span class="result">Inconsistent delivery</span>
+                        </div>
+                        <div class="speed-line slow" data-reveal="2">
+                            <span class="label">Building NEF</span>
+                            <div class="bar building"></div>
+                            <span class="result">Standardising</span>
+                        </div>
+                        <div class="speed-line faster" data-reveal="3">
+                            <span class="label">With NEF</span>
+                            <div class="bar accelerating"></div>
+                            <span class="result">Compounding velocity</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="speaker-notes">
+                <h4>Speaker Notes</h4>
+                <p><strong>(2 min):</strong> This was the key insight. We had to invest time to standardize - that felt like slowing down. But the compound effect was massive.</p>
+                <p>Transition: "So what did we actually build? Let me show you..."</p>
+            </div>
+        </section>
+
+        <!-- SLIDE 5: The Vision -->
+        <section class="slide" data-slide="5">
+            <div class="slide-content centered-content">
+                <h2 class="slide-title">The North Star</h2>
+                <div class="vision-statement" data-reveal="1">
+                    <div class="vision-icon">&#x1F31F;</div>
+                    <h3 class="vision-text">Every engineer deploys production-ready code on Day One</h3>
+                </div>
+                <div class="vision-subtext" data-reveal="2">
+                    <p>From ideation to production in a day. Not weeks. Not months. A day.</p>
+                </div>
+            </div>
+            <div class="speaker-notes">
+                <h4>Speaker Notes</h4>
+                <p><strong>(1 min):</strong> Simple, memorable goal. Let it land. This is what we were optimizing for. Everything else flows from this.</p>
+                <p>Pause here - let the audience absorb this. Then: "How do you get there in a heavily regulated bank? Three pillars."</p>
+            </div>
+        </section>
+
+        <!-- SLIDE 6: Three Pillars -->
+        <section class="slide" data-slide="6">
+            <div class="slide-content">
+                <h2 class="slide-title">Three Pillars of NEF</h2>
+                <div class="pillars-container">
+                    <div class="pillar" data-reveal="1">
+                        <div class="pillar-number">1</div>
+                        <h3>Remove Friction</h3>
+                        <p>Automated onboarding. Standard tools. Mac-first. Docker on laptops. Every frustration point made invisible.</p>
+                    </div>
+                    <div class="pillar" data-reveal="2">
+                        <div class="pillar-number">2</div>
+                        <h3>Standard Platform</h3>
+                        <p>Pre-integrated development platform with security & compliance built in. Released weekly. Teams inherit protections automatically.</p>
+                    </div>
+                    <div class="pillar" data-reveal="3">
+                        <div class="pillar-number">3</div>
+                        <h3>Innersource</h3>
+                        <p>Open-source culture inside the org. Champions in every team. Decentralised contribution. No bottlenecks.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="speaker-notes">
+                <h4>Speaker Notes</h4>
+                <p><strong>(4 min):</strong> Walk through each pillar deliberately.</p>
+                <p><strong>Pillar 1 - Friction:</strong> "We did things that had been seen as security threats. Docker on laptops! Macs! But the productivity gain was enormous."</p>
+                <p><strong>Pillar 2 - Platform:</strong> "This is the secret sauce. Compliance as code - teams don't even SEE the compliance work happening. They deploy, and they're secure. Every. Single. Time."</p>
+                <p><strong>Pillar 3 - Innersource:</strong> "This ensures the platform isn't a bottleneck. Anyone can contribute. We created champions in each delivery team who can approve PRs."</p>
+                <p><strong>Interactive:</strong> Ask "Which of these three would have the most impact in your org?" - Quick show of hands or call-outs.</p>
+            </div>
+        </section>
+
+        <!-- SLIDE 7: Tech Stack -->
+        <section class="slide" data-slide="7">
+            <div class="slide-content">
+                <h2 class="slide-title">The Technology Stack</h2>
+                <div class="tech-stack">
+                    <div class="tech-layer" data-reveal="1">
+                        <div class="layer-label">Infrastructure</div>
+                        <div class="tech-items">
+                            <span class="tech-badge terraform">Terraform Enterprise</span>
+                            <span class="tech-badge aws">AWS</span>
+                            <span class="tech-badge azure">Azure</span>
+                        </div>
+                        <p class="layer-desc">Standardised modules for all infrastructure deployment across multi-cloud</p>
+                    </div>
+                    <div class="tech-layer" data-reveal="2">
+                        <div class="layer-label">CI/CD</div>
+                        <div class="tech-items">
+                            <span class="tech-badge jenkins">Jenkins Templating Engine</span>
+                            <span class="tech-badge github">GitHub</span>
+                        </div>
+                        <p class="layer-desc">Reusable, standard pipeline. One template, hundreds of teams.</p>
+                    </div>
+                    <div class="tech-layer" data-reveal="3">
+                        <div class="layer-label">Governance</div>
+                        <div class="tech-items">
+                            <span class="tech-badge sentinel">Sentinel (Policy as Code)</span>
+                            <span class="tech-badge servicenow">ServiceNow</span>
+                        </div>
+                        <p class="layer-desc">Automated compliance. Audit trail. Change evidence chain.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="speaker-notes">
+                <h4>Speaker Notes</h4>
+                <p><strong>(3 min):</strong> Don't go too deep on each tool - the point is the INTEGRATION, not individual tools.</p>
+                <p>"We chose Terraform because it's industry standard and supports multi-cloud. But the magic isn't any single tool - it's that they're pre-integrated. A team gets ALL of this on day one."</p>
+                <p>"Policy as code is key for us as a regulated org. Sentinel gives us automated guardrails. ServiceNow integration provides the audit chain. Our compliance team actually LOVES this."</p>
+            </div>
+        </section>
+
+        <!-- SLIDE 8: Building Process -->
+        <section class="slide" data-slide="8">
+            <div class="slide-content">
+                <h2 class="slide-title">How We Built It</h2>
+                <div class="timeline">
+                    <div class="timeline-item" data-reveal="1">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <h4>Phase 1: Listen</h4>
+                            <p>"We were very systematic around how we worked internally with teams and understood their requirements."</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item" data-reveal="2">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <h4>Phase 2: Standardise</h4>
+                            <p>Narrowed languages. Created reusable modules. Built the integrated platform as a product with weekly releases.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item" data-reveal="3">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <h4>Phase 3: Enable</h4>
+                            <p>Ran bootcamps to train engineers. Created champions in every team. Made adoption easy and rewarding.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item" data-reveal="4">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <h4>Phase 4: Scale</h4>
+                            <p>Innersource model. Decentralised governance. Any team can contribute back. The platform evolves with the org.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="speaker-notes">
+                <h4>Speaker Notes</h4>
+                <p><strong>(4 min):</strong> This is the "how" section - most valuable for the audience.</p>
+                <p><strong>Listen:</strong> "We didn't build this in isolation. We sat with teams, understood pain points, mapped the common patterns."</p>
+                <p><strong>Standardise:</strong> "Controversial step - narrowing languages. But every successful software company does this. Each language serves a specific purpose."</p>
+                <p><strong>Enable:</strong> "You can't just build it and hope they come. Bootcamps were critical. We invested heavily in training."</p>
+                <p><strong>Scale:</strong> "The innersource model means we DON'T become a bottleneck. Champions in each team can approve PRs to the central platform."</p>
+                <p><strong>Interactive:</strong> "What's been your experience with platform teams? Enablers or bottlenecks?" - Open for 1-2 responses.</p>
+            </div>
+        </section>
+
+        <!-- SLIDE 9: Impact -->
+        <section class="slide" data-slide="9">
+            <div class="slide-content">
+                <h2 class="slide-title">The Impact</h2>
+                <div class="impact-grid">
+                    <div class="impact-stat" data-reveal="1">
+                        <div class="stat-number counter" data-target="300">0</div>
+                        <div class="stat-label">Engineers in the team</div>
+                    </div>
+                    <div class="impact-stat" data-reveal="2">
+                        <div class="stat-number">100s</div>
+                        <div class="stat-label">Squads standardised</div>
+                    </div>
+                    <div class="impact-stat" data-reveal="3">
+                        <div class="stat-number">Day 1</div>
+                        <div class="stat-label">Code to production</div>
+                    </div>
+                    <div class="impact-stat" data-reveal="4">
+                        <div class="stat-number">Weekly</div>
+                        <div class="stat-label">Platform releases</div>
+                    </div>
+                </div>
+                <div class="impact-quote" data-reveal="5">
+                    <blockquote>"If you focus on velocity, then quality is a fast follower."</blockquote>
+                    <p class="attribution">- Inspired by Spotify's engineering philosophy</p>
+                </div>
+            </div>
+            <div class="speaker-notes">
+                <h4>Speaker Notes</h4>
+                <p><strong>(2 min):</strong> Let the numbers speak. Pause between each stat.</p>
+                <p>Key point: "Every time a team deploys, they inherit new security features automatically. The compliance posture improves with every single deployment across the entire org."</p>
+                <p>The Spotify quote resonates with technical leaders. Velocity first, quality follows - but only if you have the foundations right.</p>
+            </div>
+        </section>
+
+        <!-- SLIDE 10: Lessons Learned -->
+        <section class="slide" data-slide="10">
+            <div class="slide-content">
+                <h2 class="slide-title">Lessons Learned</h2>
+                <div class="lessons-grid">
+                    <div class="lesson-card" data-reveal="1">
+                        <div class="lesson-number">01</div>
+                        <h3>Let teams run first</h3>
+                        <p>You NEED the chaotic cloud adoption phase. Teams need to feel the pain of inconsistency before they'll embrace standardisation.</p>
+                    </div>
+                    <div class="lesson-card" data-reveal="2">
+                        <div class="lesson-number">02</div>
+                        <h3>Build a product, not a project</h3>
+                        <p>Weekly releases. Treat the platform like a product your teams are the customers of. They inherit value every time they deploy.</p>
+                    </div>
+                    <div class="lesson-card" data-reveal="3">
+                        <div class="lesson-number">03</div>
+                        <h3>Compliance as a feature</h3>
+                        <p>In a regulated org, make security invisible. Teams shouldn't spend effort on compliance - they should GET it for free.</p>
+                    </div>
+                    <div class="lesson-card" data-reveal="4">
+                        <div class="lesson-number">04</div>
+                        <h3>Decentralise to scale</h3>
+                        <p>Innersource prevents the platform team from becoming a bottleneck. Champions everywhere. Anyone can contribute.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="speaker-notes">
+                <h4>Speaker Notes</h4>
+                <p><strong>(3 min):</strong> These are the takeaways people will remember. Be candid and conversational.</p>
+                <p><strong>Lesson 1:</strong> "I know this sounds counterintuitive. But if you try to standardise too early, you get resistance. People need to feel the pain."</p>
+                <p><strong>Lesson 2:</strong> "Projects end. Products evolve. We release weekly - that cadence keeps us accountable."</p>
+                <p><strong>Lesson 3:</strong> "Our compliance team went from being worried to being our biggest champions. They get evidence automatically."</p>
+                <p><strong>Lesson 4:</strong> "GitHub innersource model. Curated orgs. Pull requests reviewed by champions in delivery teams, not a central team."</p>
+            </div>
+        </section>
+
+        <!-- SLIDE 11: The Bigger Picture -->
+        <section class="slide" data-slide="11">
+            <div class="slide-content centered-content">
+                <h2 class="slide-title">The Bigger Picture</h2>
+                <div class="philosophy-block" data-reveal="1">
+                    <div class="philosophy-items">
+                        <div class="philosophy-item">
+                            <span class="phil-concept">Platforms</span>
+                            <span class="phil-not">not pipelines</span>
+                        </div>
+                        <div class="philosophy-item">
+                            <span class="phil-concept">Abstractions</span>
+                            <span class="phil-not">not toil</span>
+                        </div>
+                        <div class="philosophy-item">
+                            <span class="phil-concept">Autonomy</span>
+                            <span class="phil-not">with alignment</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="philosophy-cta" data-reveal="2">
+                    <p>Empowering teams to move fast - securely, responsibly, and at scale.</p>
+                </div>
+            </div>
+            <div class="speaker-notes">
+                <h4>Speaker Notes</h4>
+                <p><strong>(2 min):</strong> This is your closing philosophy. These three phrases encapsulate everything NEF stands for.</p>
+                <p>"Platforms not pipelines" - we built a product, not a one-time automation.</p>
+                <p>"Abstractions not toil" - engineers shouldn't wrestle with infrastructure. They should describe what they want.</p>
+                <p>"Autonomy with alignment" - teams still own their destiny. But they do it on a foundation that keeps everyone safe and productive.</p>
+            </div>
+        </section>
+
+        <!-- SLIDE 12: Q&A -->
+        <section class="slide" data-slide="12">
+            <div class="slide-content centered-content">
+                <h2 class="slide-title">Let's Discuss</h2>
+                <div class="qa-section">
+                    <div class="qa-prompts">
+                        <div class="qa-prompt" data-reveal="1">What challenges are you facing with developer experience?</div>
+                        <div class="qa-prompt" data-reveal="2">How does your org handle compliance at speed?</div>
+                        <div class="qa-prompt" data-reveal="3">What's your experience with platform teams?</div>
+                        <div class="qa-prompt" data-reveal="4">How do you balance autonomy with standardisation?</div>
+                    </div>
+                    <div class="qa-footer" data-reveal="5">
+                        <p class="connect-text">Connect with me</p>
+                        <p class="connect-detail">Andrew Brydon | linkedin.com/in/andrewbrydon</p>
+                    </div>
+                </div>
+            </div>
+            <div class="speaker-notes">
+                <h4>Speaker Notes</h4>
+                <p><strong>Q&A (20 min):</strong> Use these prompts to seed discussion if questions are slow to start. But usually the audience will have plenty to ask about:</p>
+                <ul>
+                    <li>How did you get buy-in from leadership?</li>
+                    <li>What resistance did you face?</li>
+                    <li>How did you measure success?</li>
+                    <li>What would you do differently?</li>
+                </ul>
+                <p><strong>Common questions to prepare for:</strong></p>
+                <ul>
+                    <li>"How long did it take?" - About 9 months to first version, but it's ongoing as a product.</li>
+                    <li>"What about teams that resisted?" - Champions model. Peer influence. Show don't tell.</li>
+                    <li>"Budget?" - Substantial budget, ~300 person team. But the ROI was clear in developer productivity.</li>
+                </ul>
+            </div>
+        </section>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="chatbot.js"></script>
+</body>
+</html>
